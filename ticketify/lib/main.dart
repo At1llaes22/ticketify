@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home:
-          Homepage(), /*EventDetails(), */ /*GoRouter.of(context).go('/auth'),*/
+          OrganizerHomepage(), /*EventDetails(), */ /*GoRouter.of(context).go('/auth'),*/
     );
   }
 }
