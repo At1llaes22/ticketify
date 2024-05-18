@@ -44,10 +44,13 @@ class PageLayout extends StatefulWidget {
 
 class _PageLayoutState extends State<PageLayout> {
   Future<void> _fetchData() async {
-    print("enter;");
     // Send the login request to your Flask backend
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:5000/event/getAllEvents'),
+      Uri.parse(
+          'http://127.0.0.1:5000/getAllEvents'), // Update with your backend URL
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
     );
     print(response.body);
 
@@ -56,10 +59,25 @@ class _PageLayoutState extends State<PageLayout> {
       // Successful login, navigate to homepage or perform other actions
       final Map<String, dynamic> responseBody = jsonDecode(response.body);
       String token = responseBody['access_token'];
-    } else {
-      //
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
-      _showErrorDialog(responseBody['message'] ?? 'Login failed');
+
+      // Save the token securely
+      //   await storage.write(key: 'access_token', value: token);
+      //   if (userType == 'buyer') {
+      //     Navigator.pushReplacement(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => const Homepage()),
+      //     );
+      //   }
+      //   if (userType == 'organizer') {
+      //     Navigator.pushReplacement(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => const OrganizerHomepage()),
+      //     );
+      //   }
+      // } else {
+      //   // Login failed, display error message in a dialog
+      //   final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      //   _showErrorDialog(responseBody['message'] ?? 'Login failed');
       // }
     }
   }
@@ -88,7 +106,6 @@ class _PageLayoutState extends State<PageLayout> {
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
     Size screenSize = MediaQuery.of(context).size;
-    UtilConstants().getAllEvents();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -138,7 +155,7 @@ class _PageLayoutState extends State<PageLayout> {
                   child: ItemGrid(
                     scrollController: scrollController,
                     fetchDataFunction: (int currentPage, int pageSize) async {
-                      _fetchData();
+                      // Replace this function with your actual data fetching logic
                       return [];
                     },
                   ),
