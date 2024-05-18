@@ -61,6 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           //AdminCreateReport()
+
           ProfileBrowseTickets()
 
 //            Text(activePage)
@@ -114,6 +115,7 @@ class _ProfilePageBuyerState extends State<ProfilePageBuyer> {
                 "Settings",
                 style: TextStyle(color: AppColors.black),
               )),
+
           ProfileBrowseTickets()
 
 //            Text(activePage)
