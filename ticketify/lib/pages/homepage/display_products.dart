@@ -44,10 +44,17 @@ class PageLayout extends StatefulWidget {
 
 class _PageLayoutState extends State<PageLayout> {
   Future<void> _fetchData() async {
+
     print("enter;");
     // Send the login request to your Flask backend
+
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:5000/event/getAllEvents'),
+      Uri.parse(
+          'http://127.0.0.1:5000/getAllEvents'), // Update with your backend URL
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+
     );
     print(response.body);
 
@@ -56,10 +63,12 @@ class _PageLayoutState extends State<PageLayout> {
       // Successful login, navigate to homepage or perform other actions
       final Map<String, dynamic> responseBody = jsonDecode(response.body);
       String token = responseBody['access_token'];
+
     } else {
       //
       final Map<String, dynamic> responseBody = jsonDecode(response.body);
       _showErrorDialog(responseBody['message'] ?? 'Login failed');
+
       // }
     }
   }
