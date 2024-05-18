@@ -7,14 +7,14 @@ import 'package:ticketify/pages/auth/widgets/appbar/user_app_bar.dart';
 import 'package:ticketify/pages/admin/admin_create_report.dart';
 import 'package:ticketify/pages/profile/widgets/profile_past_tickets.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class AdminPage extends StatefulWidget {
+  const AdminPage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<AdminPage> createState() => _AdminPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _AdminPageState extends State<AdminPage> {
   //TODO: activePage logici ile gösterilecek sayfa seçilebilir.
   String activePage = "ssssss";
   @override
@@ -35,13 +35,19 @@ class _ProfilePageState extends State<ProfilePage> {
             title: "Memduh Tutuş Welcome back!sssssssss",
             pageListConfigs: [
               PageListConfig(
-                title: 'My Tickets',
+                  title: 'Users',
+                  menuItems: [
+                    'View Users',
+                    'Edit Users',
+                  ],
+                  iconData: Icons.person),
+              PageListConfig(
+                title: 'Venues',
                 menuItems: [
-                  'Past Tickets',
-                  'Upcoming Tickets',
-                  'Favoutite Venues',
+                  'View Venues',
+                  'Edit Venues',
                 ],
-                iconData: Icons.event,
+                iconData: Icons.place,
               ),
               PageListConfig(
                 title: 'Settings',
@@ -53,8 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-          //AdminCreateReport()
-          ProfileBrowseTickets()
+          AdminCreateReport()
 
 //            Text(activePage)
         ],
