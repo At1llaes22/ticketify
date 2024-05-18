@@ -67,7 +67,6 @@ app.register_blueprint(report_bp)
 
 print("heree4")
 
-
 def execute_schema_sql():
     print("handling schemas")
     with app.app_context():
@@ -107,7 +106,6 @@ def execute_schema_sql():
             finally:
                 cursor.fetchall()
                 cursor.close()
-
 
 @app.route('/login', methods=['POST'])
 def login():
