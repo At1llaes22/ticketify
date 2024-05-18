@@ -191,4 +191,58 @@ class UtilConstants {
       throw Exception('Error fetching venue data: $e');
     }
   }
+
+  Future<void> createEvent(
+      BuildContext context,
+      String eventName,
+      String startDate,
+      String endDate,
+      String eventCategory,
+      String eventImage,
+      String descriptionText,
+      String eventRules,
+      int venueId,
+      String performerName,
+      List<int> ticketPrices) async {
+    // Retrieve the token
+    final String? token = await getToken();
+
+    // Construct the data payload with provided arguments
+    final Map<String, dynamic> data = {
+      'event_name': eventName,
+      'start_date': startDate,
+      'end_date': endDate,
+      'event_category': eventCategory,
+      'event_image': eventImage,
+      'description_text': descriptionText,
+      'event_rules': eventRules,
+      'venue_id': venueId,
+      'performer_name': performerName,
+      'ticket_prices': ticketPrices,
+    };
+
+    // Send the request to your Flask backend
+    final response = await http.post(
+      Uri.parse(
+          'http://127.0.0.1:5000/event/createEvent'), // Update with your backend URL
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(data),
+    );
+
+    // Handle the response from the backend
+    if (response.statusCode == 200) {
+      // Operation successful, navigate to homepage or perform other actions
+      // Example: Navigator.pushReplacementNamed(context, '/homepage');
+    } else {
+      // Operation failed, display error message in a dialog
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      print(response.body); // Optional: For debugging purposes
+
+      _showErrorDialog(
+          responseBody['message'] ?? 'Event creation failed', context);
+    }
+  }
 }
