@@ -17,7 +17,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool isLogin = true;
+  bool isLogin = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +54,10 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
           Expanded(
               child: isLogin
-                   ? LoginForm(
-                       setParentState: () => setState(() {
-                             isLogin = false;
-                           }))
+                  ? LoginForm(
+                      setParentState: () => setState(() {
+                            isLogin = false;
+                          }))
                   : RegisterForm(
                       setParentState: () => setState(() {
                             isLogin = true;
