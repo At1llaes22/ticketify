@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ticketify/constants/constant_variables.dart';
 import 'package:ticketify/general_widgets/page_title.dart';
 import 'package:ticketify/objects/event_model.dart';
+import 'package:ticketify/pages/homepage/ItemGrid.dart';
+import 'package:ticketify/pages/homepage/one_item_view.dart';
 
 class EventsPage extends StatefulWidget {
   EventsPage({super.key});
@@ -57,7 +59,26 @@ class _EventsPageState extends State<EventsPage> {
                         final event = snapshot.data![index];
                         return InkWell(
                           onTap: () {
-                            // Handle the tap
+                            PostDTO post = PostDTO(
+                              id: event.eventId.toString(),
+                              tags: event.eventCategory!,
+                              title: event.eventName!,
+                              imageUrl: event.urlPhoto!,
+                              sdate: DateTime.now(),
+                              location: event.venue!.address!,
+                              organizer: event.organizerFirstName!,
+                              rules: event.eventRules!,
+                              desc: event.descriptionText!,
+                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OneItemView(
+                                  post: post,
+                                  event_id: event.eventId.toString(),
+                                ),
+                              ), // TODO: BURAYA GOROUTER
+                            );
                           },
                           child: Card(
                             color: Colors.grey,
