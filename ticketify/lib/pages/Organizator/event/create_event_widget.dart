@@ -35,7 +35,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
 
   Future<void> loadVenues() async {
     var fetchedVenues = await UtilConstants()
-        .getAllVenues(); // Make sure this returns VenueModel
+        .getAllVenues(context); // Make sure this returns VenueModel
     setState(() {
       venueModel = fetchedVenues;
     });
