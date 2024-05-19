@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:ticketify/pages/Organizator/event/events.dart';
 
 import 'package:ticketify/pages/auth/widgets/appbar/user_app_bar.dart';
 import 'package:ticketify/constants/constant_variables.dart';
@@ -114,15 +116,16 @@ class _PageLayoutState extends State<PageLayout> {
                     },
                     icon: const Icon(Icons.list_alt_sharp),
                   ),
-                Expanded(
-                  child: ItemGrid(
-                    scrollController: scrollController,
-                    fetchDataFunction: (int currentPage, int pageSize) async {
-                      // Replace this function with your actual data fetching logic
-                      return [];
-                    },
-                  ),
-                ),
+                EventsPage(),
+                // Expanded(
+                //   child: ItemGrid(
+                //     scrollController: scrollController,
+                //     fetchDataFunction: (int currentPage, int pageSize) async {
+                //       // Replace this function with your actual data fetching logic
+                //       return [];
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
